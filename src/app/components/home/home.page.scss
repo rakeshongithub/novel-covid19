@@ -46,3 +46,18 @@ ion-content ion-toolbar {
     color: #666;
   }
 }
+
+.last-update {
+  font-size: 11px;
+  color: lighten($color: #666, $amount: 15%);
+}
+
+.home-page-card {
+  max-width: 500px;
+  box-shadow: none;
+  border: 1px solid #e5e5e5;
+  margin: 20px auto;
+  @media (max-width: 767px) {
+    margin: 20px 15px;
+  }
+}

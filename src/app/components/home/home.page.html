@@ -1,12 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar color="danger">
-    <ion-title>
-      Novel Covid 19
-      <span>Coronavirus Disease Pandemic</span>
-    </ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content [fullscreen]="true" class="home-page-wrapper">
   <div class="animation-wrapper">
     <app-stay-home></app-stay-home>
@@ -14,32 +5,143 @@
   <h1 class="home-page-heading">
     #Stay @ Home
     <span>Coronavirus Disease (COVID-19) Pandemic</span>
+    <span class="last-update"
+      >Last updated: {{allCases && allCases.updated | date: 'long'}}</span
+    >
   </h1>
-  <ion-card mode="ios" *ngIf="allCases">
+  <ion-card mode="ios" class="home-page-card">
+    <ion-segment
+      color="tertiary"
+      value="allCases"
+      mode="md"
+      (ionChange)="segmentChanged($event)"
+    >
+      <ion-segment-button value="allCases">
+        <ion-label>All Cases</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="byCountry">
+        <ion-label>By Countries</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="allCases && isAllCases(resultType)">
+      <ion-card-content>
+        <ion-label>Total Recovered:</ion-label>
+        <ion-card-title color="success"
+          >{{allCases.recovered | number}}</ion-card-title
+        >
+      </ion-card-content>
+      <ion-card-content>
+        <ion-label>Total Coronavirus Cases:</ion-label>
+        <ion-card-title color="danger"
+          >{{allCases.cases | number}}</ion-card-title
+        >
+      </ion-card-content>
+      <ion-card-content>
+        <ion-label>Total Deaths:</ion-label>
+        <ion-card-title color="danger"
+          >{{allCases.deaths | number}}</ion-card-title
+        >
+      </ion-card-content>
+    </div>
+
+    <div *ngIf="allCases && isByCountry(resultType)">
+      <ion-card-content>
+        <ion-list mode="md">
+          <ion-item (ionChange)="handleSelectCountry($event)">
+            <ion-label>Countries</ion-label>
+            <ion-select placeholder="Select Country">
+              <ion-select-option *ngFor="let country of allCountries"
+                >{{country}}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </div>
+  </ion-card>
+
+  <ion-card *ngIf="countryRecord" class="home-page-card">
     <ion-card-header>
-      <ion-card-subtitle
-        >Last updated: {{allCases.recovered | date: 'long'}}</ion-card-subtitle
+      <ion-card-title
+        ><img src="{{countryRecord.countryInfo.flag}}" width="20px" />
+        {{countryRecord.country}}
+      </ion-card-title>
+      <ion-card-subtitle>
+        Per One Million records of
+      </ion-card-subtitle>
+
+      <ion-card-subtitle>
+        Deaths -
+        <ion-label color="danger"
+          >{{countryRecord.deathsPerOneMillion || 0}}</ion-label
+        >
+        | Cases -
+        <ion-label color="primary"
+          >{{countryRecord.casesPerOneMillion || 0}}</ion-label
+        >
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-list>
+      <ion-item color="success">
+        <ion-label>Total Recovered</ion-label>
+        <ion-badge slot="end" color="light"
+          >{{countryRecord.recovered | number}}</ion-badge
+        >
+      </ion-item>
+      <ion-item color="warning">
+        <ion-label>Total Cases</ion-label>
+        <ion-badge slot="end" color="light"
+          >{{countryRecord.cases | number}}</ion-badge
+        >
+      </ion-item>
+
+      <ion-item color="danger">
+        <ion-label>Total Deaths</ion-label>
+        <ion-badge slot="end" color="light"
+          >{{countryRecord.deaths | number}}</ion-badge
+        >
+      </ion-item>
+
+      <ion-item color="primary">
+        <ion-label>Active Cases</ion-label>
+        <ion-badge slot="end" color="light"
+          >{{countryRecord.active | number}}</ion-badge
+        >
+      </ion-item>
+
+      <ion-item color="secondary">
+        <ion-label>Today Cases</ion-label>
+        <ion-badge slot="end" color="light"
+          >{{countryRecord.todayCases | number}}</ion-badge
+        >
+      </ion-item>
+
+      <ion-item color="tertiary">
+        <ion-label>Active Critical</ion-label>
+        <ion-badge slot="end" color="light"
+          >{{countryRecord.critical | number}}</ion-badge
+        >
+      </ion-item>
+
+      <ion-item color="danger">
+        <ion-label>Today Deaths</ion-label>
+        <ion-badge slot="end" color="light"
+          >{{countryRecord.todayDeaths | number}}</ion-badge
+        >
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card mode="ios" class="home-page-card">
+    <ion-card-header>
+      <ion-card-subtitle>created by</ion-card-subtitle>
+      <ion-card-title>Rakesh Kumar</ion-card-title>
+      E-mail:
+      <a href="mailto:rakeshpersonal@gmail.com?subject=Hi, Rakesh!"
+        >raksehpersonal[@]gmail.com</a
       >
     </ion-card-header>
-
-    <ion-card-content>
-      <ion-label>Total Recovered:</ion-label>
-      <ion-card-title color="success"
-        >{{allCases.recovered | number}}</ion-card-title
-      >
-    </ion-card-content>
-    <ion-card-content>
-      <ion-label>Total Coronavirus Cases:</ion-label>
-      <ion-card-title color="danger"
-        >{{allCases.cases | number}}</ion-card-title
-      >
-    </ion-card-content>
-    <ion-card-content>
-      <ion-label>Total Deaths:</ion-label>
-      <ion-card-title color="danger"
-        >{{allCases.deaths | number}}</ion-card-title
-      >
-    </ion-card-content>
   </ion-card>
 </ion-content>
 

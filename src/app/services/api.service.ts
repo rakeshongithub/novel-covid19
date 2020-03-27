@@ -12,4 +12,12 @@ export class ApiService {
   getAllCases() {
     return this.http.get(`${this.baseUrl}/all`);
   }
+
+  getCasesByCountry(countryName: string) {
+    return this.http.get(`${this.baseUrl}/countries/${countryName}`);
+  }
+
+  getCasesForAllCountries() {
+    return this.http.get(`${this.baseUrl}/countries`);
+  }
 }
