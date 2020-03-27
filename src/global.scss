@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,50 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import "./theme/custom-vars.scss";
+
+// font-family: 'Poppins', sans-serif;
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+ion-content {
+  //   --background: #fff url("assets/bg1.jpg") no-repeat center center / cover;
+  --background: #fff;
+}
+
+ion-title {
+  font-weight: normal;
+  //   padding-left: 55px;
+  span {
+    display: block;
+    font-size: 11px;
+  }
+
+  //   i {
+  //     position: absolute;
+  //     font-size: 35px;
+  //     top: 6px;
+  //     left: 10px;
+  //     color: $covid-primary;
+  //   }
+}
+
+h1 {
+  font-size: 30px;
+  span {
+    display: block;
+    font-size: 12px;
+  }
+  &.home-page-heading {
+    font-size: 40px;
+    text-align: center;
+    color: $covid-primary;
+    span {
+      font-size: 13px;
+      margin-top: 8px;
+      color: #666;
+    }
+  }
+}

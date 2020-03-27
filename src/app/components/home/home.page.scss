@@ -29,3 +29,20 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+
+.home-page-wrapper {
+  ion-card {
+    text-align: center;
+  }
+}
+
+.animation-wrapper {
+  margin-top: 20px;
+}
+
+.home-page-footer {
+  ion-title {
+    font-size: 11px;
+    color: #666;
+  }
+}

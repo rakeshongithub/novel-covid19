@@ -1,0 +1,50 @@
+<!-- <ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>
+      Novel Covid 19
+      <span>Coronavirus Disease Pandemic</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true" class="home-page-wrapper">
+  <div class="animation-wrapper">
+    <app-stay-home></app-stay-home>
+  </div>
+  <h1 class="home-page-heading">
+    #Stay @ Home
+    <span>Coronavirus Disease (COVID-19) Pandemic</span>
+  </h1>
+  <ion-card mode="ios" *ngIf="allCases">
+    <ion-card-header>
+      <ion-card-subtitle
+        >Last updated: {{allCases.recovered | date: 'long'}}</ion-card-subtitle
+      >
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-label>Total Recovered:</ion-label>
+      <ion-card-title color="success"
+        >{{allCases.recovered | number}}</ion-card-title
+      >
+    </ion-card-content>
+    <ion-card-content>
+      <ion-label>Total Coronavirus Cases:</ion-label>
+      <ion-card-title color="danger"
+        >{{allCases.cases | number}}</ion-card-title
+      >
+    </ion-card-content>
+    <ion-card-content>
+      <ion-label>Total Deaths:</ion-label>
+      <ion-card-title color="danger"
+        >{{allCases.deaths | number}}</ion-card-title
+      >
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer mode="ios" class="home-page-footer">
+  <ion-toolbar>
+    <ion-title>Copyright - All Rights Reserved.</ion-title>
+  </ion-toolbar>
+</ion-footer>
