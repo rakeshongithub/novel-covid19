@@ -45,7 +45,7 @@
       </ion-card-content>
     </div>
 
-    <div *ngIf="allCases && isByCountry(resultType)">
+    <div *ngIf="allCases && isByCountry(resultType) && allCountries.length">
       <ion-card-content>
         <ion-list mode="md">
           <ion-item (ionChange)="handleSelectCountry($event)">
@@ -133,7 +133,50 @@
     </ion-list>
   </ion-card>
 
-  <ion-card mode="ios" class="home-page-card">
+  <!-- <h1 class="home-page-heading">
+    #Stay @ Home
+    <span>Coronavirus Disease (COVID-19) Pandemic</span>
+    <span class="last-update"
+      >Last updated: {{allCases && allCases.updated | date: 'long'}}</span
+    >
+  </h1> -->
+
+  <div class="daily-news-wrapper" *ngIf="newsFeeds">
+    <ion-card mode="ios" class="home-page-card" color="dark">
+      <ion-card-header>
+        <ion-card-subtitle
+          ><a href="https://newsapi.org/" target="_blank"
+            >Powered by News API</a
+          ></ion-card-subtitle
+        >
+        <ion-card-title>Top Headlines</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card mode="ios" class="home-page-card" *ngFor="let news of newsFeeds">
+      <a
+        href="https://www.engadget.com/2020-03-27-dyson-manufacturing-ventilators-covid-19.html?utm_campaign=homepage&amp;utm_medium=internal&amp;utm_source=dl"
+        target="_blank"
+      >
+        <img src="{{news.urlToImage}}" />
+      </a>
+      <ion-card-header>
+        <ion-card-subtitle>{{news.author}}</ion-card-subtitle>
+        <ion-card-title>{{news.title}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{news.description.substring(0, 100)}}...
+      </ion-card-content>
+      <a
+        href="https://www.engadget.com/2020-03-27-dyson-manufacturing-ventilators-covid-19.html?utm_campaign=homepage&amp;utm_medium=internal&amp;utm_source=dl"
+        target="_blank"
+      >
+        <ion-card-subtitle>read more</ion-card-subtitle>
+      </a>
+    </ion-card>
+  </div>
+
+  <ion-card mode="ios" class="home-page-card" color="dark">
     <ion-card-header>
       <ion-card-subtitle>created by</ion-card-subtitle>
       <ion-card-title>Rakesh Kumar</ion-card-title>
@@ -141,12 +184,7 @@
       <a href="mailto:rakeshpersonal@gmail.com?subject=Hi, Rakesh!"
         >raksehpersonal[@]gmail.com</a
       >
+      <ion-card-subtitle>Copyright - All Rights Reserved.</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 </ion-content>
-
-<ion-footer mode="ios" class="home-page-footer">
-  <ion-toolbar>
-    <ion-title>Copyright - All Rights Reserved.</ion-title>
-  </ion-toolbar>
-</ion-footer>

@@ -15,12 +15,14 @@ export class HomePage {
   ) {
     this.getAllCases();
     this.getCasesForAllCountries();
+    this.getAllNewsFeed();
   }
   allCases: any;
   resultType = "allCases";
   countryRecord: any;
   allCountriesCases: any;
   allCountries = [];
+  newsFeeds: any;
 
   async presentToast(color, message) {
     const toast = await this.toastController.create({
@@ -120,6 +122,26 @@ export class HomePage {
           "danger",
           "Failed to fetch data for country: " + countryName
         );
+      }
+    );
+  }
+
+  getAllNewsFeed() {
+    this.apiService.getAllNewsFeed().subscribe(
+      data => {
+        console.info(
+          "home.page:getCasesByCountryName => Successfully fetch data for news"
+        );
+        console.log(data, "================");
+        this.newsFeeds = data && data["articles"];
+        this.presentToast("success", "Successfully fetch data for news");
+      },
+      err => {
+        console.error(err);
+        console.error(
+          "home.page:getCasesByCountryName <= something went wrong while fetching data for news: "
+        );
+        this.presentToast("danger", "Failed to fetch data for news");
       }
     );
   }
